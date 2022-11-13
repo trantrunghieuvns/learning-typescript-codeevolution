@@ -1,13 +1,6 @@
-import React from 'react'
+import { Name, PersonX } from '../Types' //personX is being ignored here
 
-type PersonX = {
-    name: {
-        first: string
-        last: string
-    }
-}
-
-function Person(props: PersonX) {
+function Person(props: Name) {
     return (
         <div>
             {`Person: ${props.name.first + ' ' + props.name.last}`}
