@@ -11,7 +11,7 @@ import { Input } from './components/Input';
 import Container from './components/Container';
 import Login from './state/Login';
 import User from './state/User';
-import { ReducerCounter } from './state/ReducerExample';
+import { ReducerCounter } from './state/useReducer_Example/DispatchReducerAction';
 
 function App() {
   const personName = {
