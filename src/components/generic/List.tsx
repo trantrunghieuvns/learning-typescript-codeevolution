@@ -1,47 +1,63 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
+import { uuid } from 'uuidv4';
 
 type ListProps = {
     index: number
-    i: number
+
     item: string
     arrayB: string[]
     items: string[]
     removedItems: string[]
     onClick: (value: string) => void
-
 }
 
-
-
 export const List = ({ items, onClick }: ListProps) => {
+    let [phuItems, setPhuItems] = useState<string[]>([...items]);
+    let [removedItems, setRemovedItems] = useState<string[]>([]);
+    // listItems = items
 
-    let [listItems, setListItems] = useState<string[]>([]);
-    listItems = items
-    console.log('full list', listItems);
-    let removedItems: string[] = [];
+
     let arrayB: string[] = [];
+    let [listItems, setListItems] = useState<string[]>(items);
 
+    console.log('listItems :>> ', listItems);
     const deleteItem = (index: number) => {
-        removedItems = items.slice(index, -index)
-        arrayB.push(...arrayB.concat(removedItems))
-        console.log('test', arrayB)
-        setListItems(listItems.splice(index, 1))
-        console.log('removed Items', removedItems);
+        setRemovedItems(listItems.filter((a, e) => index === e))
+
+        listItems.splice(index, 1)
+        setListItems((listItems) => [...listItems])
+        console.log('listItems', listItems)
     }
-
     return (
-        <div>
-            <h2>List of Items </h2>
-            <div onClick={() => { console.log('sdasd', [...listItems, ...arrayB]) }}>Reset All</div>
-            {listItems.map((item, index) => {
-                return (<>
-                    <div id='Input' key={index} onClick={() => deleteItem(index)}>{item}</div>
-                </>
-                )
-            })}
+        <>
+            <div>
+                <h2>List of Items </h2>
+                {listItems.map((item, index) => {
+                    return (<>
+                        <div key={index + 1 + index} onClick={() => {
+                            deleteItem(index)
 
-        </div >
+                        }}>{item}</div>
+                    </>
+                    )
+                })
+                }
+                <div onClick={() => {
+
+                    let longArray = items.concat(removedItems).concat(phuItems)
+                    let uniqueString: string[] = [];
+                    longArray.forEach((c) => {
+                        if (!uniqueString.includes(c)) {
+                            uniqueString.push(c);
+                        }
+                    });
+                    setListItems(uniqueString)
+                }}>Reset All</div>
+
+
+            </div >
+        </>
     )
 }
 
