@@ -58,7 +58,7 @@ function App() {
           <User email={''} />
           <ReducerCounter />
 
-          <List items={['Batman', 'sip', 'heroic']} item={''} onClick={(event) => console.log(event)} removedItems={[]} arrayB={[]} index={0} />
+          <List items={['Batman', 'sip', 'heroic']} onClick={(event) => console.log(event)} />
 
           <Oscar>
 

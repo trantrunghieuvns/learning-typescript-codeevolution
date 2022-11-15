@@ -3,11 +3,7 @@ import { useState } from 'react';
 import { uuid } from 'uuidv4';
 
 type ListProps = {
-    index: number
-    item: string
-    arrayB: string[]
     items: string[]
-    removedItems: string[]
     onClick: (value: string) => void
 }
 
