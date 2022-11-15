@@ -1,5 +1,3 @@
-
-import './App.css';
 import Button from './components/Button';
 import Greet from './components/Greet';
 import Heading from './components/Heading';
@@ -18,7 +16,17 @@ import { UserA } from './state/useContext/secondExample/UserA';
 import { UserContextProvider } from './state/useContext/secondExample/UserContext';
 import { Private } from './components/auth/Private';
 import Profile from './components/auth/Profile';
-import List from './components/generic/List';
+import List from './components/useState&MapArray/List';
+import './App.css';
+import { useState } from 'react';
+import Test from './components/useState&MapArray/BestTestSolution';
+
+type backUp = {
+  resultArray: string[]
+  people: string[]
+  splice: any
+  json: string
+}
 
 function App() {
   const personName = {
@@ -57,14 +65,13 @@ function App() {
           <Login />
           <User email={''} />
           <ReducerCounter />
-
           <List items={['Batman', 'sip', 'heroic']} onClick={(event) => console.log(event)} />
-
           <Oscar>
-
             <Heading children={''} />
           </Oscar>
           <Button />
+          <Test
+          />
           <Greet name='Vishmax' isLoggedIn={true} />
           <div className='shadow appearance-none border rounded w-[50%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'>
             <Input className="" value="Type here" handleChange={(event) => console.log(event)} />

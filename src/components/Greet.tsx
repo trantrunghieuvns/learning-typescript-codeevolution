@@ -8,6 +8,7 @@ type GreetProps = {
 }
 
 function Greet(props: GreetProps) {
+
     const { messageCount = 0 } = props
     const theme = useContext(ThemeContext)
     return (
