@@ -2,15 +2,12 @@ import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { uuid } from 'uuidv4';
 
-type ListProps = {
-    items: string[]
-    onClick: (value: string) => void
-}
+type ListProps = { items: string[] }
 
-export const List = ({ items, onClick }: ListProps) => {
-    let [phuItems, setPhuItems] = useState<string[]>([...items]);
-    // let [removedItems, setGetRemovedItems] = useState<string[]>([]); *1*
-    let [listItems, setListItems] = useState<string[]>(items);
+
+export const List = ({ items }: ListProps) => { // must declare if items is outside scope
+    let [phuItems, setPhuItems] = useState(items);
+    let [listItems, setListItems] = useState(items);
 
     const deleteItem = (index: number) => {
         // setGetRemovedItems(listItems.filter((a, e) => index === e)) *2*

@@ -1,13 +1,6 @@
 import React, { useState } from 'react'
 
-type XProp = {
-    id: number;
-    name: string;
-    coin: number;
-
-}
-
-const nameCList: XProp[] = [
+const nameCList = [
     {
         id: 2,
         name: 'hiếu',

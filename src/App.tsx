@@ -21,6 +21,11 @@ import './App.css';
 import { useState } from 'react';
 import Test from './components/useState&MapArray/BestTestSolution';
 
+import LessonOne from './components/IndianFriend/LessonOne-PassingArray';
+import LessonTwoMain from './components/IndianFriend/LessonTwo-PassingOnClickFunctionValueIndex';
+import { LessonThree } from './components/IndianFriend/LessonThree';
+
+
 type backUp = {
   resultArray: string[]
   people: string[]
@@ -36,7 +41,7 @@ function App() {
 
   const nameList = [
     {
-      first: ' Buookc',
+      first: ' Brooke',
       last: 'Be zsook'
     },
     {
@@ -49,6 +54,8 @@ function App() {
     },
 
   ]
+
+
 
   return (
     <UserContextProvider>
@@ -65,7 +72,7 @@ function App() {
           <Login />
           <User email={''} />
           <ReducerCounter />
-          <List items={['Batman', 'sip', 'heroic']} onClick={(event) => console.log(event)} />
+          <List items={['Batman', 'sip', 'heroic']} />
           <Oscar>
             <Heading children={''} />
           </Oscar>
@@ -78,6 +85,9 @@ function App() {
           </div>
           <Container styles={{ backgroundColor: 'red', padding: '10px', margin: '10px' }} />
           <UserA />
+          <LessonOne lang={nameList as []} />
+          <LessonTwoMain />
+          <LessonThree id={0} count={0} minus={0} />
         </div>
       </ThemeContextProvider>
     </UserContextProvider>
