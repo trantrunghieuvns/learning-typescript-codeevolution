@@ -1,23 +1,25 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CounterTypes } from "./LessonThree";
 
+export type CounterProps = {
+    counter: CounterTypes;
+    onIncrement: (counter: CounterTypes) => void
+    onDecrement: (counter: CounterTypes) => void
+}
 
-const Counter = (props: CounterTypes) => {
-    console.log('props', props)
-    const [hount, setHount] = useState(props.count);
-
-    useEffect(() => setHount(props.count), [props])
-    // very gud to change value, state using useEffect 
+const Counter = (props: CounterProps) => {
+    const { counter, onIncrement, onDecrement } = props
+    // destructuring , like props.counter.count = counter.count
+    // based on above code. 
     return (
         <>
             <div className="m-5">
-                <button onClick={() => setHount(hount - props.minus)}>Decrement</button >
-                <span className="btn btn-warning ">{hount}
+                <button onClick={() => props.onDecrement(counter)}>Decrement</button >
+                <span className="btn btn-warning ">{counter.count}
                 </span>
-                <button onClick={() => setHount(hount + props.minus)}>
+                <button onClick={() => props.onIncrement(counter)}>
                     Increase
                 </button>
-
             </div>
         </>
     )
