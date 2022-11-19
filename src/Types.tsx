@@ -19,3 +19,12 @@ export type PersonX = {
 export type Name = {
     name: PersonX
 }
+
+export type Posts = {
+    data: any;
+    userId: number;
+    id: number;
+    title: string;
+    body: string;
+
+}

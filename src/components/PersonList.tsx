@@ -1,4 +1,5 @@
 import React from 'react'
+import { idText } from 'typescript'
 
 type PersonListProps = {
     names: {
@@ -8,14 +9,12 @@ type PersonListProps = {
 }
 
 const PersonList = (props: PersonListProps) => {
-
-
     return (
-        <div>
+        <div >
             {props.names.map(name => {
-                return (
+                return (<div key={name.first + name.last}>
                     <h2>{name.first} {name.last}</h2>
-                )
+                </div>)
             })}
 
         </div>

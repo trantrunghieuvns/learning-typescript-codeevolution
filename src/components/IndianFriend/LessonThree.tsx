@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import Counter from "./LessonThree-CounterSecond";
 
-
 export interface CounterTypes {
     id: number;
     count: number;
@@ -13,6 +12,12 @@ export interface CounterTypes {
     minus: number;
 }
 
+export type CounterProps = {
+    counter: CounterTypes;
+    onIncrement: (counter: CounterTypes) => void
+    onDecrement: (counter: CounterTypes) => void
+}
+
 const Counters: CounterTypes[] = [
     { id: 1, count: 672, minus: 43 },
     { id: 2, count: 563, minus: 1 },
@@ -21,7 +26,6 @@ const Counters: CounterTypes[] = [
 ];
 
 export function LessonThree(props: CounterTypes) {
-    console.log('props', props.count)
     const [counters, setCounters] = useState<CounterTypes[]>(Counters)
     const handleReset = () => {
         const localCounters = counters.map((c) => {
@@ -32,7 +36,6 @@ export function LessonThree(props: CounterTypes) {
         setCounters(localCounters);
     }
 
-    console.log('counters :>> ', counters);
     const increment = (counter: CounterTypes) => {
         const localCounters = [...counters]
         const index = counters.indexOf(counter);
@@ -51,9 +54,7 @@ export function LessonThree(props: CounterTypes) {
         <button onClick={() => handleReset()}
         >Reset ALL</button>
         {counters.map((counter) => <>
-
-            <Counter key={counter.id} counter={counter} onIncrement={increment} onDecrement={decrement} />
-
+            <Counter key={counter.id * counter.minus} counter={counter} onIncrement={increment} onDecrement={decrement} />
         </>)}
     </div>)
 
