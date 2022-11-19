@@ -3,9 +3,22 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { Posts } from '../../../Types'
 
-const JSON_PLACEHOLDER_API = 'https://jsonplaceholder.typicode.com/posts?_limit=2'
+const JSON_PLACEHOLDER_API = 'https://jsonplaceholder.typicode.com/posts?_limit=4'
 
-//ACTION
+//3.TYPE
+type PostState = {
+    loading: boolean,
+    error: null | string,
+    data: null | Posts[]
+}
+
+const initialState: PostState = {
+    loading: false,
+    error: null,
+    data: null,
+};
+
+//2.ACTION
 export const getPosts = createAsyncThunk(
     'posts/getPosts',
     async (data, thunkApi) => {
@@ -17,25 +30,19 @@ export const getPosts = createAsyncThunk(
     }
 )
 
-type PostState = {
-    loading: boolean,
-    error: null | string,
-    data: null | Posts[]
-}
-
-const initialState = {
-    loading: false,
-    error: null,
-    data: null,
-} as PostState;
-
-//SLICE
+//1.SLICE
 const postSlice = createSlice({
     name: 'post',
     initialState,
-    reducers: {},
-
-    //
+    reducers: {
+        clearPost: (state) => {
+            state.data = [];
+        },
+        removePost: (state: any, action: PayloadAction<any>) => {
+            const postId = action.payload;
+            state.data = state.data.filter((item: { id: string | number }) => item.id !== postId)
+        }
+    },
     extraReducers(builder) {
         builder
             .addCase(getPosts.pending, (state, action) => {
@@ -48,10 +55,14 @@ const postSlice = createSlice({
             .addCase(getPosts.rejected, (state, action: PayloadAction<any>) => {
                 state.loading = false;
                 state.error = action.payload;
+                console.log(action);
             })
-    },
-    //
+
+    }
 
 })
+
+export const { clearPost, removePost } =
+    postSlice.actions;
 
 export default postSlice.reducer;

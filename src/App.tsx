@@ -24,15 +24,16 @@ import { LessonThree } from './components/IndianFriend/LessonThree';
 import { UseEffectBasic } from './components/IndianFriend/Lesson4-Tut13';
 import { UseEffectFetchAxiosX } from './components/IndianFriend/Lesson5-Tut14-FetchAxios';
 import UseReducerEx from './components/IndianFriend/Lesson6-tut16-useReducer';
-import ComponentA from './components/IndianFriend/Context&Reducer/RTK-Test';
+import ComponentA from './components/IndianFriend/RTK-Context&Reducer/RTK-Test';
 import { useEffect, useReducer } from 'react';
 import React from 'react';
 
 //-----------rtk
 import { useAppDispatch, useAppSelector } from './state/rtk/hooks/useTypedSelector';
-import { getPosts } from './state/rtk/posts/postSlice';
+import { getPosts, removePost } from './state/rtk/posts/postSlice';
 import Loader from './state/RTK Components/Loader';
 import PostCard from './state/RTK Components/PostCard';
+import { useDispatch, useSelector } from 'react-redux';
 
 type backUp = {
   resultArray: string[]
@@ -89,7 +90,11 @@ const App = () => {
 
   //-----------------------------------------------------------------
   //redux toolkit section
-  const dispatch = useAppDispatch();
+
+  //5. useAppDispatch():fire an action; useAppSelector(): take value out of state
+
+  const dispatch = useAppDispatch(); //of thunk
+  const actionDispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getPosts());
@@ -144,9 +149,11 @@ const App = () => {
               ) : (
                 data &&
                 data.map((post) => (
-                  <div className="col-md-6 col-lg-4" key={post.id}>
-                    <PostCard post={post} />
-                  </div>
+                  <>
+                    <div className="col-md-6 col-lg-4" key={post.id} onClick={() => actionDispatch(removePost(post.id))}>
+                      <PostCard post={post} />
+                    </div>
+                  </>
                 ))
               )}
 
